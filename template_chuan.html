@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vượt Qua Buồn Chán & Khủng Hoảng Động Lực Trong Ngành Y</title>
+<!-- Google Fonts chuẩn hỗ trợ 100% tiếng Việt có dấu hoàn hảo -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Patrick+Hand&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="core_assets/fonts.css">
+<style>
+/* =========================================================
+   CORE STYLES & DESIGN SYSTEM (HANDCRAFTED EDITORIAL)
+   ========================================================= */
+/*{{FONTS}}*/
+
+:root {
+  --ink: #2a2433;
+  --ink-soft: #554d60;
+  --ink-faint: #8e869a;
+  --paper: #fffdf8;
+  --paper-soft: #fbf7ee;
+  --paper-card: #f8f3e8;
+  --terra: #c2410c;
+  --terra-soft: #fed7aa;
+  --sage: #2d6a4f;
+  --sage-soft: #d1e7dd;
+  --navy: #1e3a8a;
+  --navy-soft: #dbeafe;
+  --amber: #b45309;
+  --amber-soft: #fde68a;
+  --purple: #7e22ce;
+  --purple-soft: #f3e8ff;
+  --line: #2a2433;
+
+  /* Font stack ưu tiên font tương thích tiếng Việt 100% */
+  --serif: 'Playfair Display', 'Fraunces', Georgia, serif;
+  --sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --hand: 'Patrick Hand', 'Caveat', cursive, sans-serif;
+  --pop: cubic-bezier(.34, 1.56, .64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; width: 100%; height: 100%;
+  background: #1c1822; color: var(--ink);
+  font-family: var(--sans); overflow: hidden;
+  user-select: none; -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: absolute; left: 50%; top: 50%;
+  width: 1920px; height: 1080px;
+  transform: translate(-50%, -50%);
+  transform-origin: center center;
+  background: var(--paper); overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,.65);
+}
+
+.slide {
+  position: absolute; inset: 0; opacity: 0; visibility: hidden;
+  transform: translateX(70px) scale(.985);
+  transition: opacity .6s ease, transform .8s cubic-bezier(.2,.8,.2,1), visibility 0s .8s;
+}
+.slide.prev { transform: translateX(-70px) scale(.985); }
+.slide.active { opacity: 1; visibility: visible; transform: none; transition: opacity .6s ease, transform .8s cubic-bezier(.2,.8,.2,1), visibility 0s; }
+.slide .abs { position: absolute; }
+.bg { position: absolute; inset: 0; }
+
+/* ===== TYPOGRAPHY & HIGHLIGHTS ===== */
+.eyebrow {
+  font-family: var(--hand); font-weight: 700; font-size: 38px;
+  color: var(--c, var(--terra)); display: inline-flex; align-items: center; gap: 12px;
+  transform: rotate(-1.5deg); transform-origin: left center;
+}
+.eyebrow .spark { width: 24px; height: 24px; }
+h1.hero, h2.title {
+  font-family: var(--serif); font-weight: 700; color: var(--ink);
+  letter-spacing: -.02em;
+}
+h1.hero { font-size: 84px; line-height: 1.12; }
+h2.title { font-size: 64px; line-height: 1.15; }
+.hl { position: relative; display: inline-block; color: var(--c, var(--terra)); white-space: nowrap; }
+.hl .ul { position: absolute; left: -2%; bottom: -.12em; width: 104%; height: .22em; overflow: visible; }
+.lede { font-size: 25px; line-height: 1.48; color: var(--ink-soft); font-weight: 500; margin: 0; }
+.quote {
+  font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 24px;
+  line-height: 1.45; color: var(--ink); position: relative; padding-left: 64px; margin: 0;
+}
+.quote::before {
+  content: "\201C"; position: absolute; left: 0; top: -26px;
+  font-size: 130px; line-height: 1; font-style: normal; color: var(--c, var(--terra)); opacity: .85;
+}
+.hand { font-family: var(--hand); font-weight: 700; color: var(--ink); }
+mark {
+  background: linear-gradient(transparent 52%, var(--mk, #fde68a) 52%, var(--mk, #fde68a) 92%, transparent 92%);
+  color: inherit; padding: 0 4px;
+}
+
+/* ===== STROKE & BUILD ANIMATIONS ===== */
+.draw, .dr { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.slide.active .ul .draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1.1s ease .8s; }
+.b.revealed .dr { stroke-dashoffset: 0; transition: stroke-dashoffset .9s ease .25s; }
+.slide.keep .dr { stroke-dashoffset: 0; }
+
+.b { opacity: 0; transform: translateY(30px); transition: opacity .55s ease, transform .75s var(--pop); }
+.b[data-a="left"] { transform: translateX(-60px); }
+.b[data-a="right"] { transform: translateX(60px); }
+.b[data-a="pop"] { transform: scale(.65) rotate(-5deg); }
+.b[data-a="drop"] { transform: translateY(-70px) rotate(4deg); }
+.b.revealed, .b.revealed[data-a] { opacity: 1; transform: none; }
+
+@keyframes rise { from { opacity: 0; transform: translateY(46px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { opacity: 0; transform: scale(.4); } to { opacity: 1; transform: none; } }
+.slide.active .rise { animation: rise .9s var(--pop) both; animation-delay: var(--d, .2s); }
+.slide.active .grow { animation: grow 1.1s var(--pop) both; animation-delay: var(--d, .2s); }
+@keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes drift { from { transform: translateX(-40px); } to { transform: translateX(60px); } }
+.bob { animation: bob 6s ease-in-out infinite; }
+.sun-rays { transform-origin: 200px 200px; animation: spin 60s linear infinite; }
+.cloud { animation: drift 15s ease-in-out infinite alternate; }
+.cloud svg, .sun svg, .hills svg, .art svg { display: block; width: 100%; height: auto; }
+.hills svg { height: 100%; }
+
+/* ===== ART & NUMBERED POINTS ===== */
+.art { position: absolute; }
+.blob { position: absolute; opacity: .7; }
+.pt { display: flex; gap: 22px; align-items: flex-start; }
+.pt .num {
+  position: relative; flex: none; width: 72px; height: 72px;
+  display: grid; place-items: center; font-family: var(--hand);
+  font-weight: 700; font-size: 48px; color: var(--c, var(--terra));
+}
+.pt .num svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.pt h3 { font-family: var(--serif); font-weight: 700; font-size: 29px; line-height: 1.18; margin: 2px 0 6px; }
+.pt p { font-size: 20.5px; line-height: 1.45; color: var(--ink-soft); font-weight: 500; margin: 0; }
+
+.chip {
+  position: relative; display: inline-block; font-family: var(--hand);
+  font-weight: 700; font-size: 40px; padding: 10px 32px; color: var(--ink); white-space: nowrap;
+}
+.chip .ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+
+/* ===== POLAROID PHOTO FRAMES (ẢNH THỰC TẾ) ===== */
+.photo-wrap {
+  position: absolute; z-index: 10;
+}
+.photo {
+  position: absolute; inset: 0; cursor: zoom-in;
+  transform: rotate(var(--rot, 0deg)); transition: transform .35s ease;
+}
+.photo:hover { transform: rotate(var(--rot, 0deg)) scale(1.03); }
+.photo .back {
+  position: absolute; inset: -14px; background: var(--back, var(--terra-soft));
+  border-radius: var(--r2, 46% 54% 40% 60% / 56% 42% 58% 44%);
+  transform: translate(18px, 18px) rotate(4deg);
+}
+.photo .img {
+  position: absolute; inset: 0;
+  border-radius: var(--r1, 56% 44% 52% 48% / 46% 54% 46% 54%);
+  overflow: hidden; border: 10px solid #fff;
+  box-shadow: 0 20px 45px -14px rgba(70,40,20,.45); background: #fff;
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tape {
+  position: absolute; width: 140px; height: 36px; top: -18px; left: 50%;
+  margin-left: -70px; background: rgba(245,190,70,.7); transform: rotate(-4deg); z-index: 2;
+  clip-path: polygon(0 0, 3% 18%, 0 34%, 3% 52%, 0 70%, 3% 86%, 0 100%, 100% 100%, 97% 86%, 100% 70%, 97% 52%, 100% 34%, 97% 18%, 100% 0);
+}
+.photo-cap {
+  position: absolute; font-family: var(--hand); font-weight: 700;
+  font-size: 32px; line-height: 1.1; color: var(--ink); white-space: nowrap;
+}
+
+/* ===== HUD (TIMER, NOTES, CONTROLS) ===== */
+#hud {
+  position: fixed; top: 16px; right: 20px; display: flex; gap: 10px;
+  align-items: center; z-index: 200; transition: opacity .5s ease;
+}
+body.idle #hud, body.idle #dots, body.idle #hint { opacity: 0; }
+body.idle { cursor: none; }
+.hud-pill {
+  display: flex; align-items: center; gap: 8px; background: rgba(255,253,248,.95);
+  border: 2px solid rgba(42,36,51,.9); border-radius: 999px;
+  padding: 5px 8px 5px 16px; box-shadow: 3px 4px 0 rgba(42,36,51,.9);
+}
+.hud-pill b { font-family: var(--hand); font-size: 24px; color: var(--ink-soft); }
+#timer {
+  font-family: var(--sans); font-weight: 700; font-size: 20px;
+  min-width: 62px; text-align: center; cursor: pointer; font-variant-numeric: tabular-nums;
+}
+#timer.low { color: #dc2626; animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+.hbtn {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid rgba(42,36,51,.9); background: #fffdf8;
+  color: var(--ink); cursor: pointer; font-size: 15px;
+  display: grid; place-items: center; box-shadow: 2px 3px 0 rgba(42,36,51,.9);
+  transition: transform .15s;
+}
+.hbtn:hover { transform: translate(-1px, -1px); }
+.hbtn.on { background: var(--ink); color: #fff; }
+.hud-pill .hbtn { width: 30px; height: 30px; font-size: 12px; box-shadow: none; }
+#dots {
+  position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 12px; z-index: 200; transition: opacity .5s ease;
+}
+#dots i {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: rgba(42,36,51,.22); cursor: pointer; transition: all .3s ease;
+}
+#dots i.cur { background: var(--terra); transform: scale(1.5); }
+#hint {
+  position: fixed; bottom: 12px; right: 22px; font-family: var(--hand);
+  font-size: 26px; color: var(--ink-soft); z-index: 200; transition: opacity .5s ease;
+}
+
+#notes {
+  position: fixed; left: 24px; bottom: 50px; width: 480px; max-height: 480px; overflow-y: auto;
+  background: #fffdf8; border: 2.5px solid var(--ink); border-radius: 20px;
+  padding: 20px 24px; z-index: 210; box-shadow: 6px 8px 0 var(--ink);
+  transform: translateY(130%) rotate(-1deg); transition: transform .45s var(--pop);
+}
+#notes.open { transform: translateY(0) rotate(-1deg); }
+#notes .t { font-family: var(--hand); font-size: 32px; color: var(--terra); font-weight: 700; margin-bottom: 6px; }
+#notes p { font-size: 18px; line-height: 1.6; margin: 0; color: #332d3d; }
+
+#lightbox {
+  position: fixed; inset: 0; background: rgba(30,24,20,.9);
+  z-index: 400; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease; padding: 40px;
+}
+#lightbox.open { opacity: 1; pointer-events: all; }
+#lightbox img {
+  max-width: 88vw; max-height: 78vh; border: 14px solid #fff;
+  border-radius: 18px; box-shadow: 0 30px 80px rgba(0,0,0,.6);
+}
+#lightbox p { margin-top: 20px; color: #fff; font-family: var(--hand); font-size: 36px; text-align: center; }
+
+/* =========================================================
+   PER-SLIDE LAYOUTS & REFINED STYLING (SLIDE 1 TO 8)
+   ========================================================= */
+
+/* ----- SLIDE 1 : BÌA (COVER) - ĐÃ FIX TRIỆT ĐỂ KHÔNG CHỒNG CHỮ ----- */
+.s1 .bg { background: linear-gradient(180deg, #fff2dd 0%, #fee4bf 55%, #fcd6a0 100%); }
+.s1 .hills { left: 0; right: 0; bottom: 0; height: 370px; }
+.s1 .sun { left: 1220px; top: 40px; width: 620px; opacity: .95; }
+.s1 .c1 { left: 720px; top: 110px; width: 240px; opacity: .9; }
+.s1 .c2 { left: 1540px; top: 500px; width: 200px; opacity: .85; animation-duration: 18s; }
+.s1 .birds { left: 960px; top: 220px; width: 140px; }
+.s1 .copy { left: 120px; top: 90px; width: 880px; }
+.s1 h1.hero { font-size: 82px; line-height: 1.12; margin: 16px 0 26px; }
+.s1 .lede { width: 820px; margin-bottom: 38px; font-size: 26px; line-height: 1.48; }
+.s1 .chips { display: flex; gap: 16px; margin-left: -16px; }
+.s1 .art { left: 960px; top: 400px; width: 920px; --primary-svg-color: var(--terra); }
+/* Di chuyển ghi chú tay sang vị trí thoáng, không chạm tiêu đề hay mặt trời */
+.s1 .note { left: 1060px; top: 380px; transform: rotate(-3deg); font-size: 38px; width: 420px; line-height: 1.08; }
+.s1 .note .arrow { position: absolute; width: 95px; height: 75px; left: 300px; top: 65px; transform: rotate(18deg); }
+
+/* ----- SLIDE 2 : BỐI CẢNH & NGHỊCH LÝ (HOOK / TENSION) ----- */
+.s2 .bg { background: #fff0e6; }
+.s2 .blob1 { left: -160px; top: 600px; width: 640px; height: 640px; background: #ffd9b8; border-radius: 60% 40% 55% 45%/50% 60% 40% 50%; }
+.s2 .blob2 { left: 1380px; top: -180px; width: 720px; height: 640px; background: #ffe4cc; border-radius: 45% 55% 50% 50%/55% 45% 55% 45%; }
+.s2 .copy { left: 120px; top: 75px; width: 1000px; }
+.s2 .copy h2 { font-size: 64px; line-height: 1.15; margin: 10px 0 16px; }
+.s2 .lede { width: 960px; font-size: 25px; margin-bottom: 20px; }
+.s2 .pts { left: 120px; top: 420px; width: 960px; display: flex; flex-direction: column; gap: 26px; }
+.s2 .photo-wrap { left: 1200px; top: 85px; width: 490px; height: 350px; }
+.s2 .cap1 { left: 1470px; top: 435px; transform: rotate(-3deg); color: var(--terra); }
+.s2 .art { left: 1220px; top: 520px; width: 620px; --primary-svg-color: var(--terra); }
+
+/* ----- SLIDE 3 : CÂU 1 - SINH VIÊN Y KHOA (DEEP DIVE 1) ----- */
+.s3 .bg { background: #f2f8f4; }
+.s3 .blob1 { left: -140px; top: 580px; width: 700px; height: 700px; background: #d7ecdf; border-radius: 50%; }
+.s3 .copy { left: 120px; top: 60px; width: 1040px; --c: var(--sage); }
+.s3 .copy h2 { font-size: 60px; line-height: 1.15; margin: 8px 0 14px; }
+.s3 .quote { width: 1000px; margin-top: 8px; --c: var(--sage); }
+.s3 .pts { left: 120px; top: 350px; width: 1040px; display: flex; flex-direction: column; gap: 16px; --c: var(--sage); }
+.s3 .photo-wrap { left: 1220px; top: 75px; width: 480px; height: 340px; }
+.s3 .cap1 { left: 1480px; top: 415px; transform: rotate(-2deg); color: var(--sage); }
+.s3 .art { left: 1200px; top: 490px; width: 620px; --primary-svg-color: var(--sage); }
+.s3 .note { left: 1200px; top: 890px; width: 640px; font-size: 30px; color: var(--sage); line-height: 1.25; }
+
+/* ----- SLIDE 4 : CÂU 1 - BÁC SĨ HÀNH NGHỀ (DEEP DIVE 2) ----- */
+.s4 .bg { background: #fff8eb; }
+.s4 .blob1 { left: 1400px; top: 560px; width: 700px; height: 700px; background: #ffe7b8; border-radius: 50%; }
+.s4 .photo-wrap { left: 100px; top: 75px; width: 480px; height: 340px; }
+.s4 .cap1 { left: 340px; top: 415px; transform: rotate(3deg); color: var(--amber); }
+.s4 .art { left: 90px; top: 490px; width: 520px; --primary-svg-color: var(--amber); }
+.s4 .note { left: 90px; top: 890px; width: 540px; font-size: 30px; color: var(--amber); line-height: 1.25; text-align: center; }
+.s4 .copy { left: 680px; top: 60px; width: 1140px; --c: var(--amber); }
+.s4 .copy h2 { font-size: 62px; line-height: 1.15; margin: 8px 0 14px; }
+.s4 .quote { width: 1100px; margin-top: 8px; --c: var(--amber); }
+.s4 .pts { left: 680px; top: 350px; width: 1140px; display: flex; flex-direction: column; gap: 16px; --c: var(--amber); }
+
+/* ----- SLIDE 5 : CÂU 2A - DẤU HIỆU NHẬN BIẾT (SELF-AWARENESS) ----- */
+.s5 .bg { background: #edf4fe; }
+.s5 .blob1 { left: 800px; top: -200px; width: 800px; height: 600px; background: #d9e7fd; border-radius: 50%; }
+.s5 .copy { left: 120px; top: 55px; width: 1680px; --c: var(--navy); }
+.s5 .copy h2 { font-size: 64px; line-height: 1.15; margin: 6px 0 12px; }
+.s5 .lede { width: 1400px; font-size: 25px; }
+.s5 .cards { left: 120px; top: 290px; width: 1680px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 36px; }
+.s5 .card {
+  background: #fffdfa; border: 2.5px solid var(--ink); border-radius: 24px;
+  padding: 28px 26px; box-shadow: 6px 8px 0 rgba(42,36,51,.9);
+  display: flex; flex-direction: column; gap: 14px; position: relative;
+}
+.s5 .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+
+/* FIX TOÀN DIỆN THAO TÁC KHOANH TRÒN SLIDE 5 */
+.s5 .card-badge {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--hand); font-weight: 700; font-size: 34px; color: var(--cc, var(--navy));
+  padding: 6px 24px; white-space: nowrap;
+}
+.s5 .card-badge .ring {
+  position: absolute; inset: -6px -14px; width: calc(100% + 28px); height: calc(100% + 12px);
+  overflow: visible; pointer-events: none;
+}
+.s5 .card h3 { font-family: var(--serif); font-weight: 700; font-size: 30px; margin: 0; color: var(--ink); }
+.s5 .card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.s5 .card li { font-size: 20px; line-height: 1.45; color: var(--ink-soft); display: flex; align-items: flex-start; }
+.s5 .warning-bar {
+  left: 120px; top: 900px; width: 1680px; font-size: 31px; line-height: 1.25;
+  color: var(--navy); text-align: center;
+}
+
+/* ----- SLIDE 6 : CÂU 2B - KHI BUỒN CHÁN NÊN LÀM GÌ? - ĐÃ FIX KHÔNG DÍNH CHỮ ----- */
+.s6 .bg { background: linear-gradient(180deg, #f5faf7 0%, #e8f4ed 100%); }
+.s6 .blob1 { left: 1000px; top: 360px; width: 900px; height: 800px; background: #d7ecdf; border-radius: 50%; }
+.s6 .copy { left: 120px; top: 55px; width: 1080px; --c: var(--sage); }
+/* Đặt font-size vừa vặn 56px để tiêu đề nằm gọn gàng trên 1 dòng duy nhất, không rớt dòng */
+.s6 .copy h2 { font-size: 56px; line-height: 1.15; margin: 8px 0 14px; }
+.s6 .lede { width: 1040px; font-size: 23.5px; line-height: 1.45; margin-bottom: 0; }
+/* Đẩy danh sách điểm bắt đầu từ top 310px, hoàn toàn cách xa lede trên 50px */
+.s6 .pts { left: 120px; top: 310px; width: 1040px; display: flex; flex-direction: column; gap: 18px; --c: var(--sage); }
+.s6 .pts .pt h3 { font-size: 27px; margin: 1px 0 4px; }
+.s6 .pts .pt p { font-size: 19.5px; line-height: 1.42; }
+.s6 .pts .tag { font-family: var(--hand); font-size: 26px; font-weight: 700; margin-top: 3px; display: block; }
+.s6 .photo-wrap { left: 1240px; top: 70px; width: 480px; height: 330px; }
+.s6 .cap1 { left: 1500px; top: 400px; transform: rotate(-3deg); color: var(--sage); }
+.s6 .art { left: 1200px; top: 460px; width: 620px; --primary-svg-color: var(--sage); }
+
+/* ----- SLIDE 7 : CÂU 2C - PHÂN TÍCH CA LÂM SÀNG BẠN NAM (CASE STUDY) ----- */
+.s7 .bg { background: #fdfaf4; }
+.s7 .copy { left: 120px; top: 45px; width: 1680px; --c: var(--terra); }
+.s7 .copy h2 { font-size: 60px; line-height: 1.15; margin: 6px 0 10px; }
+.s7 .lede { width: 1500px; font-size: 24px; }
+.s7 .panels { left: 120px; top: 245px; width: 1680px; display: grid; grid-template-columns: 1fr 1.15fr; gap: 36px; }
+.s7 .panel {
+  border-radius: 24px; padding: 24px 28px; border: 2.5px solid var(--ink);
+  box-shadow: 6px 8px 0 rgba(42,36,51,.9); display: flex; flex-direction: column; gap: 14px;
+}
+.s7 .panel.p-problem { background: #fff5ee; }
+.s7 .panel.p-solution { background: #f2faf5; position: relative; }
+.s7 .panel-title {
+  font-family: var(--serif); font-size: 28px; font-weight: 700;
+  display: flex; align-items: center; gap: 12px; margin-bottom: 2px;
+}
+.s7 .p-problem .panel-title { color: var(--terra); }
+.s7 .p-solution .panel-title { color: var(--sage); }
+.s7 .item { display: flex; flex-direction: column; gap: 3px; }
+.s7 .item b { font-size: 21px; color: var(--ink); }
+.s7 .item p { font-size: 19px; line-height: 1.45; color: var(--ink-soft); margin: 0; }
+.s7 .p-photo-wrap {
+  width: 320px; height: 215px; position: absolute; right: 24px; bottom: 20px; z-index: 10;
+}
+.s7 .takeaway {
+  left: 120px; top: 900px; width: 1680px; font-size: 30px; line-height: 1.25;
+  text-align: center;
+}
+
+/* ----- SLIDE 8 : TỔNG KẾT & KÊU GỌI (CLOSING & QUESTIONS) ----- */
+.s8 .bg { background: linear-gradient(180deg, #fff2db 0%, #fde0b7 65%, #fbc88b 100%); }
+.s8 .hills { left: 0; right: 0; bottom: 0; height: 350px; }
+.s8 .sun { left: 1140px; top: -50px; width: 680px; opacity: .92; }
+.s8 .c1 { left: 1460px; top: 150px; width: 230px; opacity: .9; }
+.s8 .c2 { left: 680px; top: 80px; width: 200px; opacity: .85; animation-duration: 19s; }
+.s8 .copy { left: 120px; top: 120px; width: 1040px; }
+.s8 h1.hero { font-size: 86px; margin: 14px 0 24px; line-height: 1.1; }
+.s8 .lede { width: 800px; font-size: 26px; line-height: 1.5; }
+.s8 .art { left: 1100px; top: 310px; width: 660px; --primary-svg-color: var(--terra); }
+.s8 .stack { left: 140px; top: 760px; width: 280px; }
+.s8 .bye { left: 470px; top: 830px; font-size: 58px; transform: rotate(-3deg); color: var(--terra); }
+.s8 .go { left: 130px; top: 640px; }
+.s8 .go button {
+  font-family: var(--serif); font-weight: 700; font-size: 32px; color: #fff;
+  background: var(--terra); border: 3px solid var(--ink); border-radius: 999px;
+  padding: 18px 46px; cursor: pointer; box-shadow: 6px 7px 0 var(--ink);
+  transition: transform .15s, box-shadow .15s;
+}
+.s8 .go button:hover { transform: translate(-2px, -2px); box-shadow: 8px 9px 0 var(--ink); }
+</style>
+</head>
+<body>
+
+<div id="stage">
+
+<!-- ================= SLIDE 1 : COVER ================= -->
+<section class="slide s1 active" data-notes="Kính chào quý thầy cô và các bạn. Hôm nay, chúng ta cùng tìm hiểu một chủ đề tâm lý học đường và tâm lý nghề nghiệp vô cùng thực tế: 'Trạng thái buồn chán và khủng hoảng động lực trong ngành Y'. Chúng ta sẽ lần lượt bóc tách nguyên nhân thực tế ở sinh viên y và bác sĩ, cách nhận biết bản thân khi rơi vào bẫy tâm lý này và những giải pháp can thiệp cụ thể qua một ca lâm sàng thực tế.">
+  <div class="bg"></div>
+  <div class="abs sun grow" style="--d:.1s">{{SUN}}</div>
+  <div class="abs cloud c1">{{CLOUD}}</div>
+  <div class="abs cloud c2">{{CLOUD}}</div>
+  <div class="abs birds rise" style="--d:.9s">{{BIRDS}}</div>
+  <div class="abs hills">{{HILLS:#f6c78a|#ebae6e|#da9754}}</div>
+
+  <div class="abs art rise" style="--d:.45s"><div class="bob">{{ART:road-to-knowledge}}</div></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.15s">{{SPARK}} Chuyên Đề Tâm Lý & Sức Khỏe Tâm Thần Y Khoa</div>
+    <h1 class="hero rise" style="--d:.3s">Vượt Qua <span class="hl">Buồn Chán{{UL}}</span><br>& Khủng Hoảng Động Lực</h1>
+    <p class="lede rise" style="--d:.5s">Nhận diện thực tế ở Bác sĩ & Sinh viên Y, dấu hiệu cảnh báo và chiến lược nuôi dưỡng lại ngọn lửa sơ tâm với nghề.</p>
+
+    <div class="chips">
+      <div class="chip b" data-step="1" data-a="pop">{{RING:#c2410c}}áp lực học tập & thi cử</div>
+      <div class="chip b" data-step="2" data-a="pop">{{RING:#2d6a4f}}kiệt quệ lâm sàng (burnout)</div>
+      <div class="chip b" data-step="3" data-a="pop">{{RING:#1e3a8a}}phục hồi động lực</div>
+    </div>
+  </div>
+
+  <div class="abs note hand b" data-step="4" data-a="drop">chữa lành bắt đầu từ<br>sự thấu cảm bản thân{{ARROW}}</div>
+</section>
+
+<!-- ================= SLIDE 2 : HOOK / TENSION ================= -->
+<section class="slide s2" data-notes="Trước tiên, chúng ta cần làm rõ bản chất: Buồn chán trong ngành Y hoàn toàn không phải là sự lười biếng hay rảnh rỗi. Đó là một cảm xúc tiêu cực tự nhiên xuất hiện khi con người đối mặt với sự đơn điệu, mất động lực và căng thẳng kéo dài. Nghịch lý lớn nhất là ngành Y vốn bận rộn bậc nhất, nhưng chính sự bận rộn rập khuôn và áp lực thi cử liên tục lại đẩy người thầy thuốc vào trạng thái trống rỗng và kiệt quệ.">
+  <div class="bg"></div>
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#c2410c}} bản chất vấn đề</div>
+    <h2 class="title rise" style="--d:.25s">Tại sao ngành Y lại dễ rơi vào <span class="hl">buồn chán?{{UL:#c2410c}}</span></h2>
+    <p class="lede rise" style="--d:.45s">Buồn chán là cảm xúc tiêu cực xuất hiện khi cá nhân cảm thấy đơn điệu, mất động lực, căng thẳng kéo dài hoặc gặp những trở ngại bế tắc trong công việc và học tập.</p>
+  </div>
+
+  <div class="abs pts">
+    <div class="pt b" data-step="1" data-a="left">
+      <div class="num">{{NUM:#c2410c}}1</div>
+      <div>
+        <h3>Nghịch Lý Ngành Y: Bận Rộn Nhưng Đơn Điệu</h3>
+        <p>Học tập và công việc luôn kín lịch, nhưng những thao tác lặp lại máy móc dễ làm xói mòn cảm giác hào hứng và ý nghĩa ban đầu.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="2" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}2</div>
+      <div>
+        <h3>Áp Lực Kéo Dài & Cạn Kiệt Năng Lượng Tinh Thần</h3>
+        <p>Sức ép điểm số, sự an toàn của người bệnh và những kỳ vọng xã hội khổng lồ khiến não bộ luôn trong tình trạng quá tải báo động.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="3" data-a="left">
+      <div class="num">{{NUM:#1e3a8a}}3</div>
+      <div>
+        <h3>Từ Chán Nản Đến Hội Chứng Kiệt Quệ (Burnout)</h3>
+        <p>Nếu không sớm nhận diện và điều chỉnh, sự buồn chán sẽ tích tụ thành cảm giác bất lực, chai sạn cảm xúc và rời bỏ nghề nghiệp.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ảnh Polaroid thực tế: Sinh viên kiệt sức bên bàn học -->
+  <div class="abs photo-wrap b" data-step="4" data-a="pop">
+    <figure class="photo" style="--rot:3deg;--back:#fed7aa" data-cap="Sinh viên rơi vào trạng thái bế tắc, cạn kiệt năng lượng khi khối lượng bài vở quá tải">
+      <div class="back"></div>
+      <div class="img"><img src="demo_photos/student_burnout_desk.jpg" alt="Sinh viên kiệt quệ bên bàn học"></div>
+      <i class="tape"></i>
+    </figure>
+  </div>
+  <div class="abs cap1 photo-cap hand b" data-step="4" data-a="drop">Quá tải & bế tắc!</div>
+
+  <div class="abs art b" data-step="5" data-a="right" style="--primary-svg-color:var(--terra)"><div class="bob">{{ART:questions}}</div></div>
+</section>
+
+<!-- ================= SLIDE 3 : CÂU 1 - SINH VIÊN Y KHOA ================= -->
+<section class="slide s3" data-notes="Đi vào câu hỏi số 1: Các tình huống thực tế khiến sinh viên y rơi vào trạng thái buồn chán. Có 4 bẫy tâm lý phổ biến: Thứ nhất, áp lực học tập quá tải và lặp lại với lượng kiến thức khổng lồ (giải phẫu, dược lý, triệu chứng...). Thứ hai, phương pháp học lý thuyết chay thiếu tương tác lâm sàng ở giai đoạn đầu. Thứ ba, lịch học kín mít gây thiếu ngủ, làm mất cân bằng cuộc sống và sở thích cá nhân. Và thứ tư, thức trắng đêm ôn bài nhưng kết quả thi cử không như ý tạo cảm giác bất lực về năng lực của mình.">
+  <div class="bg"></div>
+  <div class="blob blob1"></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#2d6a4f}} câu 1 • góc nhìn sinh viên</div>
+    <h2 class="title rise" style="--d:.25s">4 "Cái Bẫy" Khiến <span class="hl">Sinh Viên Y Khoa{{UL:#2d6a4f}}</span> Buồn Chán</h2>
+    <p class="quote rise" style="--d:.45s">Phải ghi nhớ khối lượng kiến thức khổng lồ và đối mặt với guồng quay thi cử bất tận khiến sinh viên mệt mỏi, kiệt sức và mất phương hướng.</p>
+  </div>
+
+  <div class="abs pts">
+    <div class="pt b" data-step="1" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}1</div>
+      <div>
+        <h3>Áp Lực Học Tập Quá Tải & Lặp Đi Lặp Lại</h3>
+        <p>Phải ghi nhớ khối lượng kiến thức khổng lồ (giải phẫu học, dược lý, triệu chứng học...), học thuộc lòng các giáo trình dày đặc khiến sinh viên mệt mỏi và nhàm chán.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="2" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}2</div>
+      <div>
+        <h3>Phương Pháp Học Thiếu Tương Tác Thực Tế</h3>
+        <p>Thời gian dài ngồi nghe giảng lý thuyết khô khan trên giảng đường mà ít có cơ hội tiếp xúc thực tế lâm sàng và người bệnh ở giai đoạn đầu.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="3" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}3</div>
+      <div>
+        <h3>Thiếu Ngủ & Mất Cân Bằng Cuộc Sống</h3>
+        <p>Lịch học kín mít từ sáng đến tối, thời gian ôn thi kéo dài chiếm hết thời gian dành cho sở thích cá nhân, bạn bè và nghỉ ngơi, dẫn đến cảm giác trống rỗng.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="4" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}4</div>
+      <div>
+        <h3>Áp Lực Điểm Số & Thi Cử Kéo Dài</h3>
+        <p>Kết quả thi không như mong đợi sau bao đêm thức trắng ôn bài tạo cảm giác bất lực, thất vọng và chán nản với năng lực của chính bản thân.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ảnh Polaroid thực tế: Sinh viên y học ngập trong giáo trình -->
+  <div class="abs photo-wrap b" data-step="5" data-a="pop">
+    <figure class="photo" style="--rot:-2.5deg;--back:#d1e7dd" data-cap="Núi sách y khoa khổng lồ và những kỳ thi nối tiếp nhau không dứt">
+      <div class="back"></div>
+      <div class="img"><img src="demo_photos/med_student_study.jpg" alt="Sinh viên y học bên giáo trình dày cộm"></div>
+      <i class="tape"></i>
+    </figure>
+  </div>
+  <div class="abs cap1 photo-cap hand b" data-step="5" data-a="drop">Giáo trình dày đặc!</div>
+
+  <div class="abs art b" data-step="6" data-a="right" style="--primary-svg-color:var(--sage)"><div class="bob">{{ART:exams}}</div></div>
+  <div class="abs note hand b" data-step="6" data-a="drop"><mark style="--mk:#cfe8d8">Bão hòa nhận thức: Não bộ từ chối nạp thêm lý thuyết khô khan!</mark></div>
+</section>
+
+<!-- ================= SLIDE 4 : CÂU 1 - BÁC SĨ HÀNH NGHỀ ================= -->
+<section class="slide s4" data-notes="Tiếp theo là đối với bác sĩ hành nghề. Dù đã khoác áo blouse trắng, người thầy thuốc vẫn đối mặt với 4 thách thức lớn: Thứ nhất, công việc thăm khám, làm bệnh án, trực đêm lặp đi lặp lại một cách đơn điệu, thiếu sự đổi mới. Thứ hai, quá tải bệnh nhân, trực đêm liên tục dẫn đến kiệt quệ tinh thần (Burnout). Thứ ba, cảm giác bất lực trước những ca bệnh nan y không cứu chữa được hoặc bệnh tiến triển chậm khiến nỗ lực như vô nghĩa. Và thứ tư, môi trường áp lực cao, thiếu sự thấu hiểu từ bệnh nhân, người nhà hoặc áp lực từ đồng nghiệp, lãnh đạo khiến bác sĩ cô đơn trong chính môi trường của mình.">
+  <div class="bg"></div>
+  <div class="blob blob1"></div>
+
+  <!-- Ảnh Polaroid thực tế: Bác sĩ ôm trán kiệt quệ -->
+  <div class="abs photo-wrap b" data-step="1" data-a="pop">
+    <figure class="photo" style="--rot:3deg;--back:#fde68a" data-cap="Bác sĩ kiệt quệ tinh thần (Burnout) sau những ca trực đêm căng thẳng và khối lượng bệnh án khổng lồ">
+      <div class="back"></div>
+      <div class="img"><img src="demo_photos/doctor_headache.jpg" alt="Bác sĩ kiệt quệ sau ca trực đêm"></div>
+      <i class="tape"></i>
+    </figure>
+  </div>
+  <div class="abs cap1 photo-cap hand b" data-step="1" data-a="drop">Áp lực ca trực đêm!</div>
+
+  <div class="abs art rise" style="--d:.4s"><div class="bob">{{ART:void}}</div></div>
+  <div class="abs note hand b" data-step="6" data-a="drop"><mark style="--mk:#fed7aa">Hội chứng Burnout: Ngọn nến bị đốt cháy từ cả hai đầu!</mark></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#b45309}} câu 1 • góc nhìn người hành nghề</div>
+    <h2 class="title rise" style="--d:.25s">4 Thách Thức Khiến <span class="hl">Bác Sĩ Kiệt Quệ{{UL:#b45309}}</span></h2>
+    <p class="quote rise" style="--d:.45s">Bác sĩ chữa bệnh cho người khác mỗi ngày, nhưng chính tâm hồn của người thầy thuốc cũng cần được bảo vệ trước sự đơn điệu và áp lực sinh tử.</p>
+  </div>
+
+  <div class="abs pts">
+    <div class="pt b" data-step="2" data-a="left">
+      <div class="num">{{NUM:#b45309}}1</div>
+      <div>
+        <h3>Công Việc Lặp Đi Lặp Lại Hàng Ngày</h3>
+        <p>Thực hiện các quy trình khám chữa bệnh rập khuôn, làm bệnh án, trực đêm hoặc xử lý núi giấy tờ hành chính một cách đơn điệu, thiếu sự đổi mới.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="3" data-a="left">
+      <div class="num">{{NUM:#b45309}}2</div>
+      <div>
+        <h3>Áp Lực Quá Tải & Kiệt Quệ (Burnout)</h3>
+        <p>Số lượng bệnh nhân quá đông, thời gian tiếp xúc từng người quá ngắn, trực đêm liên tục dẫn đến tinh thần kiệt quệ, mất dần niềm say mê ban đầu với nghề.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="4" data-a="left">
+      <div class="num">{{NUM:#b45309}}3</div>
+      <div>
+        <h3>Cảm Giác Bất Lực Trước Bệnh Tật</h3>
+        <p>Gặp những ca bệnh nặng, bệnh nan y không thể cứu chữa hoặc sự tiến triển chậm của người bệnh khiến bác sĩ cảm thấy mọi nỗ lực trở nên vô nghĩa.</p>
+      </div>
+    </div>
+    <div class="pt b" data-step="5" data-a="left">
+      <div class="num">{{NUM:#b45309}}4</div>
+      <div>
+        <h3>Môi Trường Áp Lực Cao, Thiếu Sự Chia Sẻ</h3>
+        <p>Thiếu sự thấu hiểu từ bệnh nhân/người nhà bệnh nhân hoặc áp lực từ đồng nghiệp, lãnh đạo khiến bác sĩ cảm thấy cô đơn, chán nản trong chính phòng bệnh.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SLIDE 5 : CÂU 2A - DẤU HIỆU NHẬN BIẾT ================= -->
+<section class="slide s5" data-notes="Bước sang Câu 2, phần a: Làm thế nào nhận biết bản thân đang buồn chán? Chúng ta có thể nhận diện thông qua 3 chiều kích rõ rệt: Về cảm xúc, cơ thể sẽ cảm thấy trống rỗng, mất hứng thú với những việc vốn yêu thích (như không muốn đọc sách y, không muốn đi chơi bạn bè), thấy thời gian trôi qua nặng nề. Về thể chất, cơ thể uể oải, cạn năng lượng, ngáp vặt, buồn ngủ lờ đờ dù đã ngủ đủ giấc. Về hành vi và tư duy, khả năng tập trung giảm sút nghiêm trọng, hay trì hoãn việc học, lướt điện thoại liên tục để 'giết thời gian' và có suy nghĩ tiêu cực rằng mọi thứ thật vô nghĩa.">
+  <div class="bg"></div>
+  <div class="blob blob1"></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#1e3a8a}} câu 2a • lắng nghe bản thân</div>
+    <h2 class="title rise" style="--d:.25s">3 Chiều Kích Nhận Biết <span class="hl">Bản Thân Đang Buồn Chán{{UL:#1e3a8a}}</span></h2>
+    <p class="lede rise" style="--d:.45s">Buồn chán không xuất hiện ngẫu nhiên — trạng thái này luôn gửi đến những tín hiệu cảnh báo rõ ràng qua tâm lý, thể chất và hành vi hàng ngày.</p>
+  </div>
+
+  <div class="abs cards">
+    <!-- Cột 1: Cảm xúc -->
+    <div class="card b" data-step="1" data-a="pop" style="--cc:var(--terra)">
+      <div class="card-header">
+        <span class="card-badge">{{RING:#c2410c}}Tâm Lý</span>
+        <span class="hand" style="font-size:24px;color:var(--ink-faint)">chiều kích 01</span>
+      </div>
+      <h3>Về Mặt Cảm Xúc</h3>
+      <ul>
+        <li>{{CHECK:#c2410c}}<span><b>Cảm giác trống rỗng:</b> Mất đi sự háo hức và niềm vui bên trong tâm hồn.</span></li>
+        <li>{{CHECK:#c2410c}}<span><b>Mất hứng thú sở thích:</b> Không còn muốn đọc sách y học, từ chối gặp gỡ tụ tập bạn bè.</span></li>
+        <li>{{CHECK:#c2410c}}<span><b>Thời gian nặng nề:</b> Cảm giác từng phút giây trôi qua rất chậm chạp và ngột ngạt.</span></li>
+      </ul>
+    </div>
+
+    <!-- Cột 2: Thể chất -->
+    <div class="card b" data-step="2" data-a="pop" style="--cc:var(--amber)">
+      <div class="card-header">
+        <span class="card-badge">{{RING:#b45309}}Sinh Lý</span>
+        <span class="hand" style="font-size:24px;color:var(--ink-faint)">chiều kích 02</span>
+      </div>
+      <h3>Về Mặt Thể Chất</h3>
+      <ul>
+        <li>{{CHECK:#b45309}}<span><b>Cơ thể uể oải, mệt mỏi:</b> Cảm giác cạn kiệt năng lượng, tay chân rã rời thiếu sức sống.</span></li>
+        <li>{{CHECK:#b45309}}<span><b>Hay ngáp vặt, buồn ngủ:</b> Luôn trong tình trạng ngái ngủ hoặc lờ đờ thiếu tỉnh táo.</span></li>
+        <li>{{CHECK:#b45309}}<span><b>Mệt mỏi tâm thần:</b> Tình trạng uể oải vẫn tiếp diễn dai dẳng ngay cả khi đã ngủ đủ giấc.</span></li>
+      </ul>
+    </div>
+
+    <!-- Cột 3: Hành vi & Tư duy -->
+    <div class="card b" data-step="3" data-a="pop" style="--cc:var(--navy)">
+      <div class="card-header">
+        <span class="card-badge">{{RING:#1e3a8a}}Hành Vi</span>
+        <span class="hand" style="font-size:24px;color:var(--ink-faint)">chiều kích 03</span>
+      </div>
+      <h3>Về Hành Vi & Tư Duy</h3>
+      <ul>
+        <li>{{CHECK:#1e3a8a}}<span><b>Giảm khả năng tập trung:</b> Dễ bị sao nhãng, liên tục trì hoãn các việc cần làm.</span></li>
+        <li>{{CHECK:#1e3a8a}}<span><b>Lướt mạng vô định:</b> Cầm điện thoại lướt liên tục để "giết thời gian" khỏa lấp trống rỗng.</span></li>
+        <li>{{CHECK:#1e3a8a}}<span><b>Suy nghĩ tiêu cực:</b> Thường xuyên thở dài và có suy nghĩ rằng mọi nỗ lực đều vô nghĩa.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="abs warning-bar hand b" data-step="4" data-a="drop">
+    <mark style="--mk:#bcd0ff">Cảnh báo: Dùng mạng xã hội để "giết thời gian" thực chất là bẫy né tránh cảm giác trống rỗng nội tâm!</mark>
+  </div>
+</section>
+
+<!-- ================= SLIDE 6 : CÂU 2B - KHI BUỒN CHÁN NÊN LÀM GÌ? - ĐÃ FIX KHÔNG DÍNH CHỮ ================= -->
+<section class="slide s6" data-notes="Phần b của Câu 2: Khi nhận diện bản thân đang buồn chán, chúng ta nên làm gì? Chúng ta có 4 bước can thiệp khoa học: Bước 1 là Thừa nhận và chấp nhận cảm xúc, hiểu rằng đây là trạng thái tâm lý tự nhiên của con người, không nên tự dằn vặt hay trách móc bản thân. Bước 2 là Thay đổi môi trường và hoạt động thể chất nhẹ nhàng: đứng dậy ra ngoài hít thở khí trời, đi dạo, nghe nhạc hoặc giãn cơ. Bước 3 là Tìm kiếm lại ý nghĩa và mục tiêu ban đầu: nhớ lại lý do mình chọn ngành y và chia sẻ với đồng nghiệp, người thân tin cậy. Và bước 4 là Sắp xếp lại công việc: chia nhỏ nhiệm vụ lớn thành các bước vi mô dễ hoàn thành để lấy lại cảm giác làm chủ.">
+  <div class="bg"></div>
+  <div class="blob blob1"></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#2d6a4f}} câu 2b • giải pháp phục hồi</div>
+    <h2 class="title rise" style="--d:.25s">4 Bước Lấy Lại <span class="hl">Động Lực & Cân Bằng{{UL:#2d6a4f}}</span></h2>
+    <p class="lede rise" style="--d:.45s">Để phá vỡ vòng xoáy buồn chán, cần can thiệp đồng thời vào nhận thức cảm xúc, trạng thái cơ thể và cách phân bổ mục tiêu.</p>
+  </div>
+
+  <div class="abs pts">
+    <div class="pt b" data-step="1" data-a="left">
+      <div class="num">{{NUM:#2d6a4f}}1</div>
+      <div>
+        <h3>Thừa Nhận & Chấp Nhận Cảm Xúc</h3>
+        <p>Nhận thức rằng buồn chán là một trạng thái tâm lý tự nhiên của con người. Ngừng dằn vặt, tự trách bản thân vì cảm xúc này không phản ánh năng lực yếu kém.</p>
+        <span class="tag" style="color:#2d6a4f">giai đoạn 1: thấu hiểu & bình thường hóa</span>
+      </div>
+    </div>
+    <div class="pt b" data-step="2" data-a="left">
+      <div class="num">{{NUM:#c2410c}}2</div>
+      <div>
+        <h3>Thay Đổi Môi Trường & Vận Động Nhẹ</h3>
+        <p>Tạm gác lại việc căng thẳng, đứng dậy đi lại, hít thở không khí trong lành, nghe bản nhạc yêu thích hoặc thực hiện vận động nhẹ (đi bộ, stretching 15-20 phút).</p>
+        <span class="tag" style="color:#c2410c">giai đoạn 2: chuyển đổi trạng thái sinh lý</span>
+      </div>
+    </div>
+    <div class="pt b" data-step="3" data-a="left">
+      <div class="num">{{NUM:#1e3a8a}}3</div>
+      <div>
+        <h3>Tìm Lại Ý Nghĩa Ban Đầu & Kết Nối Sẻ Chia</h3>
+        <p>Nhớ lại lý do tại sao mình chọn ngành Y (ngọn lửa sơ tâm). Chia sẻ cởi mở với đồng nghiệp, bạn bè hoặc người thân tin cậy để nhận được sự đồng cảm.</p>
+        <span class="tag" style="color:#1e3a8a">giai đoạn 3: phục hồi ngọn lửa mục tiêu</span>
+      </div>
+    </div>
+    <div class="pt b" data-step="4" data-a="left">
+      <div class="num">{{NUM:#b45309}}4</div>
+      <div>
+        <h3>Sắp Xếp Lại Công Việc & Vi Mục Tiêu (Micro-tasks)</h3>
+        <p>Chia nhỏ các giáo trình dày hay nhiệm vụ lớn thành từng bước nhỏ dễ hoàn thành để não bộ nhanh chóng lấy lại cảm giác làm chủ và thành tựu.</p>
+        <span class="tag" style="color:#b45309">giai đoạn 4: hành động từng bước nhỏ</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ảnh Polaroid thực tế: Đi dạo công viên phục hồi năng lượng -->
+  <div class="abs photo-wrap b" data-step="5" data-a="pop">
+    <figure class="photo" style="--rot:2.5deg;--back:#d1e7dd" data-cap="Đi dạo trong thiên nhiên 20 phút giúp tái tạo oxy cho não bộ và phục hồi trạng thái tinh thần tích cực">
+      <div class="back"></div>
+      <div class="img"><img src="demo_photos/park_walking.jpg" alt="Đi dạo công viên tái tạo năng lượng"></div>
+      <i class="tape"></i>
+    </figure>
+  </div>
+  <div class="abs cap1 photo-cap hand b" data-step="5" data-a="drop">Hít thở & đổi gió!</div>
+
+  <div class="abs art b" data-step="6" data-a="right" style="--primary-svg-color:var(--sage)"><div class="bob">{{ART:mindfulness}}</div></div>
+</section>
+
+<!-- ================= SLIDE 7 : CÂU 2C - VÍ DỤ MINH HỌA & PHÂN TÍCH ================= -->
+<section class="slide s7" data-notes="Để minh chứng rõ ràng cho lý thuyết, chúng ta cùng phân tích trường hợp thực tế của bạn Nam - sinh viên năm 4 ngành Y. Nam đang ôn thi 2 môn rất nặng là Y học cổ truyền và Bệnh học nội khoa. Do lượng kiến thức quá lớn, Nam giam mình trong phòng trọ chật chội 2 tuần liền, dẫn tới việc cầm sách là thẫn thờ lướt mạng xã hội. Phân tích cho thấy dấu hiệu mất tập trung và uể oải bắt nguồn từ việc học vẹt lặp lại kết hợp không gian cô lập gây bão hòa kiến thức. Cách giải quyết của Nam rất mẫu mực: đóng sách đi dạo công viên 20 phút để đổi gió; lập nhóm học bạn cùng lớp thảo luận ca lâm sàng; và tự thưởng thời gian nghỉ buổi tối để tái tạo năng lượng.">
+  <div class="bg"></div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK:#c2410c}} câu 2c • phân tích tình huống thực tế</div>
+    <h2 class="title rise" style="--d:.25s">Ca Lâm Sàng Tâm Lý: <span class="hl">Sinh Viên Nam (Y4){{UL:#c2410c}}</span></h2>
+    <p class="lede rise" style="--d:.45s">Nghiên cứu điển hình về bẫy kiệt quệ nhận thức trong mùa ôn thi và 3 bước giải thoát mang tính đột phá.</p>
+  </div>
+
+  <div class="abs panels">
+    <!-- Panel Trái: Tình huống & Phân tích -->
+    <div class="panel p-problem b" data-step="1" data-a="left">
+      <div class="panel-title">⚠️ Bối Cảnh & Phân Tích Bế Tắc</div>
+      <div class="item">
+        <b>1. Tình huống thực tế:</b>
+        <p>Nam là sinh viên Y4 đang ôn thi kết thúc học phần <i>Y học cổ truyền</i> và <i>Bệnh học nội khoa</i>. Lượng kiến thức quá lớn, phải đọc đi đọc lại trong phòng trọ chật chội suốt 2 tuần liền. Cầm sách lên vài trang là lại thẫn thờ lướt mạng xã hội, thấy mọi thứ vô nghĩa.</p>
+      </div>
+      <div class="item b" data-step="2" data-a="left">
+        <b>2. Dấu hiệu nhận biết:</b>
+        <p>Mất tập trung trầm trọng, liên tục lướt điện thoại để khỏa lấp khoảng trống rỗng, cơ thể mệt mỏi, uể oải và xuất hiện ý nghĩ muốn bỏ bê việc học.</p>
+      </div>
+      <div class="item b" data-step="3" data-a="left">
+        <b>3. Nguyên nhân cốt lõi:</b>
+        <p>Sự lặp đi lặp lại của việc học thuộc lòng khô khan + không gian phòng trọ cô lập + áp lực thi cử kéo dài dẫn tới <b>trạng thái bão hòa kiến thức tinh thần</b>.</p>
+      </div>
+    </div>
+
+    <!-- Panel Phải: Cách giải quyết của Nam -->
+    <div class="panel p-solution b" data-step="4" data-a="right">
+      <div class="panel-title">🌱 3 Hành Động Tự Giải Thoát Của Nam</div>
+      <div class="item">
+        <b>Hành động 1: Cắt đứt vòng xoáy chán nản tức thì</b>
+        <p>Nam nhận ra mình đang rơi vào bẫy tâm lý, lập tức đóng sách lại và ra công viên gần nhà đi dạo 20 phút để đổi không khí và tái nạp oxy cho não bộ.</p>
+      </div>
+      <div class="item b" data-step="5" data-a="right">
+        <b>Hành động 2: Thay đổi phương pháp học tương tác</b>
+        <p>Rủ bạn cùng lớp lập nhóm học tập, chuyển từ đọc lý thuyết chay một mình sang cùng nhau thảo luận, mổ xẻ các ca bệnh lâm sàng thực tế sinh động.</p>
+      </div>
+      <div class="item b" data-step="6" data-a="right">
+        <b>Hành động 3: Thiết lập cơ chế tự thưởng & nghỉ ngơi</b>
+        <p>Dành cho bản thân một khoảng nghỉ ngơi hợp lý vào buổi tối để tái tạo lại tinh thần, giúp hệ thần kinh phục hồi trước khi tiếp tục guồng quay học tập.</p>
+      </div>
+
+      <!-- Ảnh Polaroid thực tế nhóm học lâm sàng -->
+      <div class="p-photo-wrap b" data-step="6" data-a="pop">
+        <figure class="photo" style="--rot:-2deg;--back:#d1e7dd" data-cap="Nhóm sinh viên y khoa cùng nhau thảo luận ca lâm sàng thực tế thay vì học lý thuyết chay">
+          <div class="back"></div>
+          <div class="img"><img src="demo_photos/study_group.jpg" alt="Nhóm học tập thảo luận lâm sàng"></div>
+          <i class="tape" style="width:110px;height:30px;top:-14px;margin-left:-55px"></i>
+        </figure>
+      </div>
+    </div>
+  </div>
+
+  <div class="abs takeaway hand b" data-step="7" data-a="drop">
+    <mark style="--mk:#fed7aa">Đúc kết: Khi rơi vào bế tắc, đừng cố ép não bộ chịu đựng thêm — hãy thay đổi trạng thái sinh lý và tìm sự tương tác đồng đội!</mark>
+  </div>
+</section>
+
+<!-- ================= SLIDE 8 : CLOSING & Q&A ================= -->
+<section class="slide s8" data-notes="Tổng kết lại bài trình bày hôm nay: Ngành Y là một hành trình dài hạn đòi hỏi sự bền bỉ cả về tri thức lẫn sức khỏe tinh thần. Muốn trở thành chỗ dựa vững chắc cứu chữa người bệnh, người thầy thuốc phải biết lắng nghe, thấu hiểu và chăm sóc tâm hồn của chính mình trước tiên. Xin chân thành cảm ơn quý thầy cô và các bạn đã chú ý theo dõi. Kính mời mọi người cùng bước vào phần thảo luận và đặt câu hỏi.">
+  <div class="bg"></div>
+  <div class="abs sun grow" style="--d:.1s">{{SUN}}</div>
+  <div class="abs cloud c1">{{CLOUD}}</div>
+  <div class="abs cloud c2">{{CLOUD}}</div>
+  <div class="abs hills">{{HILLS:#f6c78a|#ebae6e|#da9754}}</div>
+
+  <div class="abs art rise" style="--d:.45s"><div class="bob">{{ART:winners}}</div></div>
+  <div class="abs stack rise" style="--d:.7s">{{BOOKSTACK}}</div>
+
+  <div class="abs copy">
+    <div class="eyebrow rise" style="--d:.1s">{{SPARK}} thông điệp đúc kết</div>
+    <h1 class="hero rise" style="--d:.25s">Hiểu Rõ Cảm Xúc.<br><span class="hl">Vững Bước Nghề Y.{{UL}}</span></h1>
+    <p class="lede rise" style="--d:.5s">Muốn trở thành ngọn hải đăng cứu chữa cho người bệnh, người thầy thuốc trước hết phải giữ cho ngọn lửa bên trong tâm hồn mình luôn rực sáng.</p>
+  </div>
+
+  <div class="abs go b" data-step="1" data-a="pop">
+    <button id="celebrate">🎉 Mở rộng thảo luận & Câu hỏi</button>
+  </div>
+  <div class="abs bye hand b" data-step="2" data-a="drop">Cảm ơn thầy cô & các bạn đã lắng nghe!</div>
+</section>
+
+</div><!-- /stage -->
+
+<!-- ================= HUD CONTROLS ================= -->
+<div id="hud">
+  <div class="hud-pill">
+    <b>timer</b><span id="timer" title="Bấm để đổi 5 / 10 / 15 / 20 phút">10:00</span>
+    <button class="hbtn" id="tplay" title="Bắt đầu / Tạm dừng">&#9654;</button>
+    <button class="hbtn" id="treset" title="Đặt lại">&#8634;</button>
+  </div>
+  <button class="hbtn" id="bnotes" title="Bật/Tắt Ghi chú bài nói (N)">N</button>
+  <button class="hbtn" id="bsound" title="Bật/Tắt Âm thanh (M)">&#9835;</button>
+  <button class="hbtn" id="bfull" title="Toàn màn hình (F / F11)">&#9974;</button>
+</div>
+<div id="dots"></div>
+<div id="hint">bấm space hoặc &rarr;</div>
+
+<!-- SPEAKER NOTES PANEL -->
+<aside id="notes">
+  <div class="t">kịch bản thuyết trình (Speaker Notes)</div>
+  <p id="notes-text"></p>
+</aside>
+
+<!-- LIGHTBOX PHÓNG TO ẢNH THỰC TẾ KHI NHẤP -->
+<div id="lightbox"><img id="lb-img" alt=""><p id="lb-cap"></p></div>
+
+<!-- JAVASCRIPT ENGINE -->
+<script src="core_assets/confetti.js"></script>
+<script>
+(() => {
+  const stage = document.getElementById('stage');
+
+  // Fallback decorator nếu mở trực tiếp không qua biên dịch build_slide.js
+  const decor = {
+    SUN: () => `<svg class="sun-svg" viewBox="0 0 400 400"><g class="sun-rays">${Array.from({length:16}, (_, i) => `<line x1="200" y1="${i%2?34:18}" x2="200" y2="${i%2?62:70}" stroke="#f4a62a" stroke-width="${i%2?12:15}" stroke-linecap="round" transform="rotate(${22.5*i} 200 200)"/>`).join('')}</g><circle cx="200" cy="200" r="112" fill="#f9c846"/><circle cx="200" cy="200" r="112" fill="url(#sunShade)"/><path d="M130 150 C 150 112, 196 98, 232 108" stroke="#fff3bf" stroke-width="12" stroke-linecap="round" fill="none" opacity=".75"/><defs><radialGradient id="sunShade" cx=".35" cy=".3" r=".9"><stop offset="0" stop-color="#ffe58a" stop-opacity=".9"/><stop offset="1" stop-color="#f08a24" stop-opacity=".55"/></radialGradient></defs></svg>`,
+    CLOUD: () => `<svg viewBox="0 0 240 130"><g fill="#fff"><circle cx="70" cy="84" r="36"/><circle cx="122" cy="62" r="48"/><circle cx="176" cy="86" r="38"/><rect x="48" y="84" width="170" height="38" rx="19"/></g></svg>`,
+    HILLS: (c1='#f4c98e',c2='#eab071',c3='#d99a58') => `<svg viewBox="0 0 1920 340" preserveAspectRatio="none"><path d="M0 120 C 240 40, 480 60, 720 130 S 1200 200, 1440 110 S 1760 40, 1920 90 V340 H0Z" fill="${c1}"/><path d="M0 200 C 300 120, 560 170, 860 210 S 1380 270, 1640 190 S 1840 160, 1920 180 V340 H0Z" fill="${c2}"/><path d="M0 272 C 360 232, 700 292, 1040 272 S 1600 232, 1920 282 V340 H0Z" fill="${c3}"/></svg>`,
+    UL: (c='#c2410c') => `<svg class="ul" viewBox="0 0 520 26" preserveAspectRatio="none"><path class="draw" pathLength="1" d="M4 16 C 90 4, 170 22, 260 12 S 430 6, 516 14" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/></svg>`,
+    RING: (c='#c2410c') => `<svg class="ring" viewBox="0 0 300 100" preserveAspectRatio="none"><path class="dr" pathLength="1" d="M20 58 C 8 22, 120 4, 206 12 C 290 22, 300 66, 214 84 C 130 100, 24 92, 16 52 C 14 34, 40 20, 70 14" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round"/></svg>`,
+    NUM: (c='#c2410c') => `<svg class="numring" viewBox="0 0 84 84"><path class="dr" pathLength="1" d="M44 6 C 68 4, 80 26, 77 46 C 74 68, 54 80, 34 77 C 13 73, 4 52, 8 33 C 12 15, 30 7, 52 11" fill="none" stroke="${c}" stroke-width="4.5" stroke-linecap="round"/></svg>`,
+    ARROW: (c='#2a2433') => `<svg class="arrow" viewBox="0 0 150 120"><path class="dr" pathLength="1" d="M6 8 C 60 4, 112 30, 124 96" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round"/><path class="dr" pathLength="1" d="M104 76 L124 100 L146 80" fill="none" stroke="${c}" stroke-width="5" stroke-linecap="round"/></svg>`,
+    SPARK: (c='#f59e0b') => `<svg class="spark" viewBox="0 0 24 24"><path d="M12 0 L15 9 L24 12 L15 15 L12 24 L9 15 L0 12 L9 9Z" fill="${c}"/></svg>`,
+    BIRDS: () => `<svg viewBox="0 0 220 90" fill="none" stroke="#3b3550" stroke-width="5" stroke-linecap="round"><path d="M6 40 Q 24 8 44 36 Q 62 6 82 38"/><path d="M120 62 Q 134 40 150 58 Q 164 38 180 60" stroke-width="4"/></svg>`,
+    CHECK: (c='#2d6a4f') => `<svg class="chk" viewBox="0 0 28 28" style="width:28px;height:28px;vertical-align:middle;flex:none;display:inline-block;margin-right:8px"><path d="M4 14 L10 20 L24 6" fill="none" stroke="${c}" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    BOOKSTACK: () => `<svg viewBox="0 0 320 250"><ellipse cx="160" cy="232" rx="140" ry="12" fill="#000" opacity=".12"/><g><rect x="22" y="168" width="270" height="56" rx="10" fill="#c2410c"/><rect x="44" y="176" width="240" height="40" rx="4" fill="#fff4dd"/><path d="M58 188 H270 M58 198 H258 M58 208 H266" stroke="#e8d5ae" stroke-width="3"/><rect x="22" y="168" width="26" height="56" rx="10" fill="#9a3412"/><rect x="30" y="184" width="10" height="24" rx="3" fill="#fbbf24"/></g><g transform="rotate(-2 160 150)"><rect x="48" y="112" width="232" height="52" rx="10" fill="#2d6a4f"/><rect x="68" y="120" width="204" height="36" rx="4" fill="#f4f8ef"/><path d="M80 132 H258 M80 142 H246" stroke="#d3e2cf" stroke-width="3"/><rect x="48" y="112" width="24" height="52" rx="10" fill="#1f4e3a"/><rect x="56" y="126" width="8" height="22" rx="3" fill="#fde68a"/></g><g transform="rotate(3 170 90)"><rect x="70" y="64" width="200" height="46" rx="9" fill="#1e3a8a"/><rect x="90" y="71" width="172" height="32" rx="4" fill="#fff"/><path d="M102 82 H250 M102 92 H238" stroke="#d9e1f2" stroke-width="3"/><rect x="70" y="64" width="22" height="46" rx="9" fill="#172b66"/></g><path d="M168 66 C 166 44, 172 30, 170 10" fill="none" stroke="#2d6a4f" stroke-width="5" stroke-linecap="round"/><path d="M170 38 C 148 36, 138 20, 142 8 C 162 10, 170 24, 170 38Z" fill="#3a8c66"/><path d="M170 24 C 192 22, 202 8, 198 -4 C 178 -2, 170 10, 170 24Z" fill="#2d6a4f"/></svg>`,
+    ART: n => `<img class="art-svg" src="core_assets/art/${n}.svg" alt="${n}">`
+  };
+
+  if (stage.innerHTML.includes('{{')) {
+    stage.innerHTML = stage.innerHTML.replace(/\{\{(\w+)(?::([^}]*))?\}\}/g, (m, name, args) => {
+      if (!decor[name]) return m;
+      return decor[name](...(args ? args.split('|') : []));
+    });
+  }
+
+  const slides = [...document.querySelectorAll('.slide')];
+  const dotsEl = document.getElementById('dots');
+  const timerEl = document.getElementById('timer');
+  const tplay = document.getElementById('tplay');
+  const treset = document.getElementById('treset');
+  const bnotes = document.getElementById('bnotes');
+  const bsound = document.getElementById('bsound');
+  const bfull = document.getElementById('bfull');
+  const notesPanel = document.getElementById('notes');
+  const notesText = document.getElementById('notes-text');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCap = document.getElementById('lb-cap');
+
+  let curSlide = 0;
+  let curStep = 0;
+  let maxStep = 0;
+  let soundOn = true;
+
+  // Căn giữa tuyệt đối và co giãn tự động sân khấu 1920x1080
+  function fit() {
+    const sw = window.innerWidth, sh = window.innerHeight;
+    const s = Math.min(sw / 1920, sh / 1080);
+    stage.style.transform = `translate(-50%, -50%) scale(${s})`;
+  }
+  window.addEventListener('resize', fit);
+  fit();
+
+  // Khởi tạo chấm điều hướng slide
+  slides.forEach((_, i) => {
+    const d = document.createElement('i');
+    d.title = `Slide ${i + 1}`;
+    d.onclick = () => goTo(i, 0);
+    dotsEl.appendChild(d);
+  });
+
+  function getSlideSteps(idx) {
+    const el = slides[idx];
+    const items = [...el.querySelectorAll('.b')];
+    if (!items.length) return 0;
+    return Math.max(...items.map(it => parseInt(it.dataset.step, 10) || 0));
+  }
+
+  function applySteps(slideEl, step) {
+    const items = [...slideEl.querySelectorAll('.b')];
+    items.forEach(it => {
+      const s = parseInt(it.dataset.step, 10) || 0;
+      if (s <= step) {
+        it.classList.add('revealed');
+      } else {
+        it.classList.remove('revealed');
+      }
+    });
+  }
+
+  function updateNotes() {
+    const n = slides[curSlide].dataset.notes || '(Không có ghi chú cho slide này)';
+    notesText.textContent = n;
+  }
+
+  function updateDots() {
+    [...dotsEl.children].forEach((d, i) => {
+      d.classList.toggle('cur', i === curSlide);
+      d.classList.toggle('seen', i < curSlide);
+    });
+  }
+
+  function beep(freq = 520, dur = .08, type = 'sine') {
+    if (!soundOn) return;
+    try {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = type;
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(.08, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(.0001, ctx.currentTime + dur);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + dur);
+    } catch (e) {}
+  }
+
+  function goTo(idx, step = 0) {
+    if (idx < 0 || idx >= slides.length) return;
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === idx);
+      s.classList.toggle('prev', i < idx);
+    });
+    curSlide = idx;
+    maxStep = getSlideSteps(idx);
+    curStep = Math.min(step, maxStep);
+    applySteps(slides[curSlide], curStep);
+    updateDots();
+    updateNotes();
+    beep(440, .07);
+  }
+
+  function next() {
+    if (curStep < maxStep) {
+      curStep++;
+      applySteps(slides[curSlide], curStep);
+      beep(580, .06);
+    } else if (curSlide < slides.length - 1) {
+      goTo(curSlide + 1, 0);
+    }
+  }
+
+  function prev() {
+    if (curStep > 0) {
+      curStep--;
+      applySteps(slides[curSlide], curStep);
+      beep(360, .06);
+    } else if (curSlide > 0) {
+      const prevIdx = curSlide - 1;
+      const prevSteps = getSlideSteps(prevIdx);
+      goTo(prevIdx, prevSteps);
+    }
+  }
+
+  // Điều khiển bàn phím chuyên nghiệp
+  window.addEventListener('keydown', e => {
+    if (lightbox.classList.contains('open')) {
+      if (e.key === 'Escape') lightbox.classList.remove('open');
+      return;
+    }
+    if (e.key === ' ' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+      e.preventDefault(); next();
+    } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+      e.preventDefault(); prev();
+    } else if (e.key === 'Home') {
+      goTo(0, 0);
+    } else if (e.key === 'End') {
+      goTo(slides.length - 1, getSlideSteps(slides.length - 1));
+    } else if (e.key.toLowerCase() === 'n') {
+      notesPanel.classList.toggle('open');
+      bnotes.classList.toggle('on');
+    } else if (e.key.toLowerCase() === 'f') {
+      toggleFull();
+    } else if (e.key.toLowerCase() === 'm') {
+      soundOn = !soundOn;
+      bsound.classList.toggle('on', !soundOn);
+    }
+  });
+
+  // Lightbox phóng to ảnh khi nhấp
+  document.querySelectorAll('.photo').forEach(ph => {
+    ph.addEventListener('click', e => {
+      e.stopPropagation();
+      const img = ph.querySelector('img');
+      if (!img) return;
+      lbImg.src = img.src;
+      lbCap.textContent = ph.dataset.cap || img.alt || '';
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+
+  // Đồng hồ đếm ngược trạm (5, 10, 15, 20 phút)
+  const presets = [5 * 60, 10 * 60, 15 * 60, 20 * 60];
+  let presetIdx = 1;
+  let remain = presets[presetIdx];
+  let timerId = null;
+
+  function renderTimer() {
+    const m = Math.floor(remain / 60);
+    const s = remain % 60;
+    timerEl.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    timerEl.classList.toggle('low', remain <= 60 && remain > 0);
+  }
+
+  function startTimer() {
+    if (timerId) return;
+    timerId = setInterval(() => {
+      if (remain > 0) {
+        remain--;
+        renderTimer();
+        if (remain === 0) beep(880, .4, 'triangle');
+      }
+    }, 1000);
+    tplay.textContent = '❚❚';
+  }
+
+  function pauseTimer() {
+    clearInterval(timerId);
+    timerId = null;
+    tplay.textContent = '▶';
+  }
+
+  tplay.onclick = () => { if (timerId) pauseTimer(); else startTimer(); };
+  treset.onclick = () => { pauseTimer(); remain = presets[presetIdx]; renderTimer(); };
+  timerEl.onclick = () => {
+    presetIdx = (presetIdx + 1) % presets.length;
+    remain = presets[presetIdx];
+    pauseTimer();
+    renderTimer();
+  };
+  renderTimer();
+
+  // Chế độ toàn màn hình
+  function toggleFull() {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen().catch(() => {});
+    }
+  }
+  bfull.onclick = toggleFull;
+  bnotes.onclick = () => {
+    notesPanel.classList.toggle('open');
+    bnotes.classList.toggle('on');
+  };
+  bsound.onclick = () => {
+    soundOn = !soundOn;
+    bsound.classList.toggle('on', !soundOn);
+  };
+
+  // Nút chúc mừng bắn pháo hoa giấy confetti
+  const celBtn = document.getElementById('celebrate');
+  if (celBtn) {
+    celBtn.onclick = () => {
+      beep(700, .15);
+      if (window.confetti) {
+        confetti({ particleCount: 90, spread: 75, origin: { y: .6 } });
+        setTimeout(() => confetti({ particleCount: 60, angle: 60, spread: 60, origin: { x: 0 } }), 220);
+        setTimeout(() => confetti({ particleCount: 60, angle: 120, spread: 60, origin: { x: 1 } }), 380);
+      }
+    };
+  }
+
+  // Tự động ẩn thanh công cụ khi không di chuột
+  let idleTimer = null;
+  function resetIdle() {
+    document.body.classList.remove('idle');
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(() => document.body.classList.add('idle'), 3000);
+  }
+  window.addEventListener('mousemove', resetIdle);
+  resetIdle();
+
+  // Khởi động tại Slide 1
+  goTo(0, 0);
+})();
+</script>
+</body>
+</html>
